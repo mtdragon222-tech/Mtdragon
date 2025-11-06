@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starry Night Proposal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 77, 109, 0.2), transparent 70%);
+  z-index: 1;
+}
+
+/* Intro screen */
+#intro {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 1s ease-in-out;
+  z-index: 10;
+}
+
+#intro h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8rem;
+  color: #ff8fab;
+  text-shadow: 0 0 15px #ff4d6d;
+  margin-bottom: 20px;
+}
+
+#startBtn {
+  background: linear-gradient(90deg, #ff4d6d, #ff8fab);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 77, 109, 0.5);
+  transition: 0.3s;
+}
+#startBtn:hover { transform: scale(1.1); }
+
+/* Stars */
+.stars {
+  position: absolute;
+  width: 2px; height: 2px; background: white;
+  box-shadow:
+    50px 100px white, 200px 400px white, 350px 800px white,
+    700px 200px white, 800px 500px white, 900px 300px white,
+    600px 700px white, 100px 900px white;
+  animation: animStars 60s linear infinite;
+  z-index: 0;
+}
+@keyframes animStars { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
+
+/* Shooting star */
+.shooting-star {
+  position: absolute;
+  width: 2px; height: 80px;
+  background: linear-gradient(white, transparent);
+  top: 50%; left: 0;
+  transform: rotate(45deg);
+  animation: shoot 3s linear infinite;
+  z-index: 0;
+}
+@keyframes shoot {
+  0% { left: -10%; opacity: 0; }
+  10% { opacity: 1; }
+  100% { left: 110%; opacity: 0; }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: 0;
+  width: 20px; height: 20px;
+  background: radial-gradient(circle, #ff4d6d 20%, transparent 70%);
+  border-radius: 50%;
+  animation: floatHearts 10s linear infinite;
+  opacity: 0.6;
+}
+@keyframes floatHearts {
+  0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+
+/* Scrolling Text */
+.scroll-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  z-index: 2;
+}
+.scroll-text {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: #ff4d6d;
+  text-shadow: 0 0 10px #ff8fab, 0 0 20px #ffb6c1;
+  animation: scroll 15s linear infinite;
+}
+@keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+h2 {
+  font-weight: 300;
+  color: #ccc;
+  margin-bottom: 30px;
+  animation: fadeIn 3s ease-in;
+  z-index: 2;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(90deg, #ff4d6d, #ff8fab);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.4s;
+  box-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+  margin: 8px;
+  animation: fadeIn 3.5s ease-in;
+  z-index: 2;
+  animation: pulseBtn 2s infinite;
+}
+button:hover { transform: scale(1.1); }
+@keyframes pulseBtn { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+/* Proposal text */
+.proposal {
+  margin-top: 25px;
+  font-size: 1.6rem;
+  color: #ffb6c1;
+  text-shadow: 0 0 20px #ff4d6d;
+  display: none;
+  animation: glowPulse 1.5s ease-in-out infinite alternate;
+  z-index: 2;
+}
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #ff4d6d, 0 0 20px #ffb6c1; }
+  to { text-shadow: 0 0 25px #ff8fab, 0 0 35px #ffc0cb; }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+.music-btn {
+  position: absolute;
+  top: 15px; right: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  width: 45px; height: 45px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+.music-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+@media (max-width: 600px) {
+  .scroll-text { font-size: 2rem; }
+  h2 { font-size: 1.2rem; }
+  button { font-size: 1rem; padding: 10px 20px; }
+  .proposal { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Intro screen -->
+<div id="intro">
+  <h1>💖 Tap to start music & animation 💖</h1>
+  <button id="startBtn">Start</button>
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://github.com/mtdragon222-tech/Mtdragon/blob/main/BIBASH%20JK-LONELY%20REMIX.mp4" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" onclick="toggleMusic(event)">🔊</button>
+
+<div class="stars"></div>
+<div class="shooting-star"></div>
+
+<div class="scroll-container">
+  <div class="scroll-text">I LOVE YOU 💖</div>
+</div>
+
+<h2>I have something to say...</h2>
+<button onclick="showProposal()">💖 Propose</button>
+<p class="proposal" id="proposalText"></p>
+
+<script>
+// Floating hearts
+for (let i = 0; i < 20; i++) {
+  let heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+  document.body.appendChild(heart);
+}
+
+// Show proposal + heart explosion
+function showProposal() {
+  const textEl = document.getElementById('proposalText');
+  textEl.textContent = "ROSES ARE RED SKY IS BLUE HEY I LOVE YOU TILL THE SUN AND MOON ALIVE 💞";
+  textEl.style.display = 'block';
+
+  // Extra hearts
+  for (let i = 0; i < 15; i++) {
+    let heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.bottom = '10px';
+    heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
+  }
+}
+
+// Music toggle
+const music = document.getElementById('bgMusic');
+let playing = false;
+function toggleMusic(event) {
+  if (playing) { music.pause(); event.target.textContent = '🔇'; }
+  else { music.play(); event.target.textContent = '🔊'; }
+  playing = !playing;
+}
+
+// Intro click → start music + fade out intro
+const intro = document.getElementById('intro');
+const startBtn = document.getElementById('startBtn');
+startBtn.addEventListener('click', () => {
+  intro.style.opacity = '0';
+  setTimeout(() => intro.style.display = 'none', 1000);
+  music.play().catch(() => {}); // Mobile-safe music start
+  playing = true;
+});
+</script>
+
+</body>
+</html>
